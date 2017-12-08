@@ -63,11 +63,11 @@ For other parameters, I chose `orientations=8`, `pixels_per_cell=(8, 8)` and `ce
 I trained a linear SVM using HOG features, Spatial features and Histogram features.
 
 The parameters used for HOG feature are: 
-color_space = 'YCrCb'
-orient = 9  
-pix_per_cell = 8
-cell_per_block = 2
-hog_channel = "ALL
+* color_space = 'YCrCb'
+* orient = 9  
+* pix_per_cell = 8
+* cell_per_block = 2
+* hog_channel = "ALL
 
 I used for spatial size of (32,32) for Spatial feature and bin size of 32 for Histogram features.
 The total number of features came out to be 8460. Refer to code cell [8]
@@ -80,10 +80,10 @@ I used sliding window search along with Hug sub-sampling technique to avoid comp
 
 To avoid searching too many windows, I used a different scale in different y value ranges. scale of 1 corresponds to 64x64 pixel windows. I also computed how many windows I'm searching at differnt scale.
 
-scale of 1.25 between y values 360 and 500  (180 windows)
-scale of 1.5 between 360 and 550 (147 windows)
-scale of 1.75 between 360 and 600 (164 windows)
-scale of 2 between 360 and 656 (72 windows)
+* scale of 1.25 between y values 360 and 500  (180 windows)
+* scale of 1.5 between 360 and 550 (147 windows)
+* scale of 1.75 between 360 and 600 (164 windows)
+* scale of 2 between 360 and 656 (72 windows)
 
 I experimented with different scales and y value ranges to optimize number of windows to search and good vehicle detection and found above values optimal.
 
