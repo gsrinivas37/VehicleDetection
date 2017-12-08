@@ -103,19 +103,11 @@ Here's a [link to my video result](./project_video.mp4)
 #### 2. Describe how (and identify where in your code) you implemented some kind of filter for false positives and some method for combining overlapping bounding boxes.
 
 I recorded the positions of positive detections in each frame of the video.  From the positive detections I created a heatmap and then thresholded that map to identify vehicle positions.  I then used `scipy.ndimage.measurements.label()` to identify individual blobs in the heatmap.  I then assumed each blob corresponded to a vehicle.  I constructed bounding boxes to cover the area of each blob detected.  
+Here's an example result showing positive detections of test_images, created heatmap and the bounding boxes then overlaid on the test_images:
 
-Here's an example result showing the heatmap from a series of frames of video, the result of `scipy.ndimage.measurements.label()` and the bounding boxes then overlaid on the last frame of video:
-
-### Here are six frames and their corresponding heatmaps:
+### Here are four test images with positive detections, their corresponding heatmaps and resulting bounding boxes
 
 ![alt text][image5]
-
-### Here is the output of `scipy.ndimage.measurements.label()` on the integrated heatmap from all six frames:
-![alt text][image6]
-
-### Here the resulting bounding boxes are drawn onto the last frame in the series:
-![alt text][image7]
-
 
 
 ---
@@ -125,4 +117,15 @@ Here's an example result showing the heatmap from a series of frames of video, t
 #### 1. Briefly discuss any problems / issues you faced in your implementation of this project.  Where will your pipeline likely fail?  What could you do to make it more robust?
 
 Here I'll talk about the approach I took, what techniques I used, what worked and why, where the pipeline might fail and how I might improve it if I were going to pursue this project further.  
+
+* I started with exploring the techniques of Color histogram features, Binned Color features and HOG features individually.
+* I explored the above features on car and non-car images and saw how they extracted the relevant details of images.
+* I created different utility methods from the lecture videos as I learned these concepts which I eventually used in the project.
+* I trained Linear SVM with above features by experimenting with different parameters of HOG and finally arrived at 99% accuracy.
+* I used sliding window techinique to search for cars on the test images at different scales. I used multiple sized windows and experimented with scales till I found optimal number of windows and good detections.
+* I created heatmap with all the positive detections and used a threshold of 2 to get bounding boxes for indivual cars.
+* Finally for the video, I accumulated all the positive detections over 10 consecutive frames to smooth out the boundig boxes and avoid spurious false detections.
+* I found that when two cars are closer to each other, instead of detecting two individual cars, it was detected as on big bounding box for two cars.
+
+
 
