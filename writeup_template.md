@@ -76,13 +76,20 @@ The total number of features came out to be 8460. Refer to code cell [8]
 
 #### 1. Describe how (and identify where in your code) you implemented a sliding window search.  How did you decide what scales to search and how much to overlap windows?
 
-I decided to search random window positions at random scales all over the image and came up with this (ok just kidding I didn't actually ;):
+I used sliding window search along with Hug sub-sampling technique to avoid computing hog features for each window as described in lecture videos. I used find_cars method in code cell [9] to search multiple scaled windows. I used 75% overlap between windows.
 
-![alt text][image3]
+To avoid searching too many windows, I used a different scale in different y value ranges. scale of 1 corresponds to 64x64 pixel windows. I also computed how many windows I'm searching at differnt scale.
+
+scale of 1.25 between y values 360 and 500  (180 windows)
+scale of 1.5 between 360 and 550 (147 windows)
+scale of 1.75 between 360 and 600 (164 windows)
+scale of 2 between 360 and 656 (72 windows)
+
+I experimented with different scales and y value ranges to optimize number of windows to search and good vehicle detection and found above values optimal.
 
 #### 2. Show some examples of test images to demonstrate how your pipeline is working.  What did you do to optimize the performance of your classifier?
 
-Ultimately I searched on two scales using YCrCb 3-channel HOG features plus spatially binned color and histograms of color in the feature vector, which provided a nice result.  Here are some example images:
+Ultimately I searched on four scales using YCrCb 3-channel HOG features plus spatially binned color and histograms of color in the feature vector, which provided a nice result.  Here are some example images:
 
 ![alt text][image4]
 ---
