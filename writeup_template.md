@@ -48,11 +48,29 @@ Here is an example using the `HSV` and `YCrCb` color space with HOG parameters o
 
 #### 2. Explain how you settled on your final choice of HOG parameters.
 
-I tried various combinations of parameters and...
+I tried exploring RBG, HSV and YCrCb channels for extracting HOG features. I found that my accuracy was best when I chose YCrCb with "ALL" channels. 
+
+HSV with only "S" channel gave me ~94% accuracy.
+HSV with "ALL" channels gave me ~98% accuracy.
+YCrCb with "ALL" channels gave me 99+% accuracy.
+
+Looking at the HOG parameter images, it was visually clear that HSV "S" channel has lot of information. In "YCrCb" channels, all channels seems to have some features. It was not very clearly apparant from images, but after trying different choices and also from hints from lecture videos, I chose "YCrCb" with "ALL" channels.
+
+For other parameters, I chose `orientations=8`, `pixels_per_cell=(8, 8)` and `cells_per_block=(2, 2)` as recommended in lecture videos.
 
 #### 3. Describe how (and identify where in your code) you trained a classifier using your selected HOG features (and color features if you used them).
 
-I trained a linear SVM using...
+I trained a linear SVM using HOG features, Spatial features and Histogram features.
+
+The parameters used for HOG feature are: 
+color_space = 'YCrCb'
+orient = 9  
+pix_per_cell = 8
+cell_per_block = 2
+hog_channel = "ALL
+
+I used for spatial size of (32,32) for Spatial feature and bin size of 32 for Histogram features.
+The total number of features came out to be 8460. Refer to code cell [8]
 
 ### Sliding Window Search
 
